@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>منيو مطعم شامي | Shamy Restaurant Menu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --primary:#ff8c00; /* برتقالي */
+      --accent:#ffeb3b;  /* أصفر */
+      --danger:#e53935;  /* أحمر */
+      --wa-green:#25D366;
+      --wa-dark:#128C7E;
+      --bg:#fffcf5;
+      --card:#fff;
+      --muted:#666;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:'Cairo',sans-serif;background:var(--bg);color:#222}
+    header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--danger);color:#fff;gap:12px}
+    header .logo {display:flex;align-items:center;gap:10px}
+    header img{height:44px;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.12)}
+    header h1{margin:0;font-size:1.2rem;font-weight:900}
+    .lang-toggle{background:var(--primary);border:none;color:#fff;padding:8px 12px;border-radius:14px;font-weight:700;cursor:pointer}
+
+    .hero{padding:36px 18px;text-align:center;background-image:url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1400&q=80');background-size:cover;background-position:center;color:#fff;position:relative}
+    .hero::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,0.35)}
+    .hero *{position:relative;z-index:1}
+    .hero h2{margin:0;font-size:2rem;font-weight:900;text-shadow:1px 1px 6px rgba(0,0,0,0.4)}
+    .hero p{margin:8px 0 12px;color:#fff;font-size:1rem;text-shadow:1px 1px 4px rgba(0,0,0,0.35)}
+    .hero .cta{background:var(--accent);color:#222;border:none;padding:10px 20px;border-radius:26px;font-weight:800;cursor:pointer}
+
+    .tabs{display:flex;gap:8px;padding:12px;overflow-x:auto;background:linear-gradient(90deg,var(--accent),#fff);justify-content:flex-end}
+    .tab{background:transparent;border:none;padding:10px 16px;border-radius:22px;font-weight:800;cursor:pointer;color:#222;white-space:nowrap}
+    .tab.active{background:var(--danger);color:#fff;box-shadow:0 8px 22px rgba(229,57,53,0.14)}
+
+    main{padding:18px;max-width:1200px;margin:0 auto}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+
+    .card{background:var(--card);border-radius:14px;overflow:hidden;box-shadow:0 8px 22px rgba(0,0,0,0.06);display:flex;flex-direction:column;transition:transform .22s}
+    .card:hover{transform:translateY(-6px)}
+    .card .imgwrap{width:100%;height:140px;overflow:hidden;background:#f3f3f6}
+    .card img{width:100%;height:100%;object-fit:cover;display:block}
+    .card .body{padding:12px;display:flex;flex-direction:column;gap:8px;flex:1}
+    .card h3{margin:0;font-size:1rem;color:var(--danger);font-weight:900}
+    .card p.desc{margin:0;color:var(--muted);font-size:0.9rem;flex:1}
+    .card .price{font-weight:900;color:var(--primary);font-size:1rem}
+    .card .add{margin-top:8px;background:var(--primary);border:none;color:#fff;padding:10px;border-radius:10px;cursor:pointer;font-weight:800}
+
+    /* cart bar */
+    .cartbar{position:fixed;bottom:0;left:0;right:0;background:var(--danger);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;box-shadow:0 -8px 30px rgba(0,0,0,0.18);transform:translateY(120%);transition:transform .28s;z-index:999}
+    .cartbar.show{transform:translateY(0)}
+    .cart-info{font-weight:800}
+    .cart-total{color:var(--accent);font-weight:900;margin-left:8px}
+    .checkout{background:var(--wa-green);border:none;color:#fff;padding:10px 14px;border-radius:24px;font-weight:900;cursor:pointer}
+    .checkout:hover{background:var(--wa-dark)}
+
+    /* popup cart (mobile friendly) */
+    .cart-popup{position:fixed;bottom:72px;left:12px;right:12px;max-width:560px;margin:0 auto;background:var(--card);border-radius:12px;box-shadow:0 18px 40px rgba(0,0,0,0.18);z-index:1000;display:none}
+    .cart-popup.show{display:block}
+    .cart-popup h4{margin:0;padding:12px;background:var(--danger);color:#fff;border-radius:12px 12px 0 0;font-weight:900}
+    .cart-popup ul{list-style:none;margin:0;padding:12px;max-height:320px;overflow:auto}
+    .cart-popup li{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px dashed #eee}
+    .qty{display:flex;align-items:center;gap:6px}
+    .qty button{width:30px;height:30px;border-radius:6px;border:1px solid #ddd;background:#f7f7f7;cursor:pointer;font-weight:800}
+
+    footer{height:12px}
+
+    @media(min-width:900px){
+      .hero{padding:56px 18px}
+      .card .imgwrap{height:160px}
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="https://raw.githubusercontent.com/ShamyMedia/Shamy-Menu/main/images/logo.png?raw=true" alt="Shamy Logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/120x60.png?text=Shamy'">
+      <h1 id="menuTitle">مطعم شامي</h1>
+    </div>
+    <button class="lang-toggle" id="langToggle" onclick="toggleLang()">English</button>
+  </header>
+
+  <section class="hero" aria-hidden="false">
+    <h2 id="heroTitle">أهلاً بك في مطعم شامي</h2>
+    <p id="heroText">أطعمة سريعة وشامية بطعم أصيل — اطلب بسهولة عبر السلة</p>
+    <div style="margin-top:14px"><button class="cta" onclick="scrollToMenu()">ابدأ الطلب</button></div>
+  </section>
+
+  <div class="tabs" id="tabsContainer" role="tablist" aria-label="أقسام المنيو"></div>
+
+  <main id="main">
+    <section id="menu" class="grid" aria-live="polite"></section>
+  </main>
+
+  <!-- cart bar -->
+  <div class="cartbar" id="cartbar" aria-hidden="true">
+    <div class="cart-info">
+      <span id="cartCount">0</span> <span id="cartItemsText">عناصر في السلة</span>
+      <span id="cartTotal" class="cart-total">0 ج.م</span>
+    </div>
+    <div>
+      <button class="checkout" id="checkoutBtn" onclick="checkout()">
+        تأكيد الطلب
+      </button>
+    </div>
+  </div>
+
+  <!-- cart popup -->
+  <div class="cart-popup" id="cartPopup" aria-hidden="true">
+    <h4 id="cartPopupTitle">سلة الطلبات <span style="float:left;cursor:pointer" onclick="toggleCartPopup(false)">❌</span></h4>
+    <ul id="cartList"></ul>
+    <div style="padding:12px;display:flex;justify-content:space-between;font-weight:900;color:var(--danger)" id="cartFooter"></div>
+    <div style="padding:12px"><button class="checkout" style="width:100%" onclick="checkout()">تأكيد الطلب عبر واتساب</button></div>
+  </div>
+
+  <footer></footer>
+
+  <script>
+    /* ---------- configuration ---------- */
+    const WA_NUMBER = '201006404614';
+    let lang = localStorage.getItem('shamy_lang') || 'ar';
+    const categories = ['meals','sandwiches','salads','drinks'];
+
+    /* ---------- بيانات المنيو مع الصور المعدّلة ---------- */
+    const menuData = [
+      // meals (وجبات)
+      {id:1,cat:'meals',name_ar:'سوبر تشيكن فيليه',name_en:'Super Chicken Fillet',desc_ar:'برجر فيليه دجاج مشوي، جبنة شيدر، خس، طماطم، صوص شامي خاص.',desc_en:'Grilled chicken fillet burger with cheddar, lettuce, tomato & special sauce.',price:78,img:'https://images.deliveryhero.io/image/menu-import-gateway-prd/regions/ME/chains/HS-BK/4bd63b510f490d70cbcb53cf2771a9ab.png'},
+      {id:2,cat:'meals',name_ar:'كلاسيك برجر لحم',name_en:'Classic Beef Burger',desc_ar:'برجر لحم بقري طازج، جبنة شيدر، بصل مكرمل، خس.',desc_en:'Fresh beef patty, cheddar, caramelized onion, lettuce.',price:85,img:'https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=80'},
+      {id:3,cat:'meals',name_ar:'تشيكن ستربس كومبو',name_en:'Chicken Strips Combo',desc_ar:'شرائح دجاج مقرمشة مع بطاطس وسلطة جانبية.',desc_en:'Crispy chicken strips with fries and side salad.',price:92,img:'https://img.ananinja.com/media/ninja-catalog-42/restaurants/jijzagxingv2kyth7g1d4ldta9zn/20002.jpg'},
+      {id:4,cat:'meals',name_ar:'كومبو ريزو وقطع دجاج',name_en:'Rice & Chicken Combo',desc_ar:'أرز متبل مع قطع دجاج متبلة وصوص لذيذ.',desc_en:'Seasoned rice with marinated chicken pieces.',price:115,img:'https://images.deliveryhero.io/image/talabat/MenuItems/talabat_photos_%D8%AF%D9%8A%D9%86%D8%B1_%D8%A8%D9%88%D9%83%D8%B3638915744621195867.jpg'},
+      {id:5,cat:'meals',name_ar:'وجبة فيليه حار',name_en:'Spicy Fillet Meal',desc_ar:'فيليه دجاج حار، صوص خاص، بطاطس مقرمشة.',desc_en:'Spicy chicken fillet, special sauce, crispy fries.',price:82,img:'https://images.deliveryhero.io/image/menu-import-gateway-prd/regions/ME/chains/HS-CCHN/68b76f8927b45a2f08504e0b059c8fef.jpg'},
+      {id:6,cat:'meals',name_ar:'كومبو عائلي مشكل',name_en:'Family Mixed Combo',desc_ar:'تشكيلة عائلية من الأصناف مع بطاطس وسلطات.',desc_en:'Family mix combo with fries and salads.',price:320,img:'https://chickenkingorder.com/uploads//175988586756241666034286714890.png'},
+      {id:7,cat:'meals',name_ar:'برجر دبل تشيز',name_en:'Double Cheese Burger',desc_ar:'قطعتين لحم مع طبقتين جبنة شيدر، صوص خاص.',desc_en:'Two beef patties with double cheddar and special sauce.',price:120,img:'https://img-global.cpcdn.com/recipes/9263d78abd97cae7/1200x630cq80/photo.jpg'},
+      {id:8,cat:'meals',name_ar:'ستيك لحم مشوي',name_en:'Grilled Beef Steak',desc_ar:'شريحة لحم متبلة مشوية تقدم مع خضار مشوية.',desc_en:'Seasoned grilled steak served with roasted vegetables.',price:260,img:'https://cdn.al-ain.com/lg/images/2019/12/08/47-120948-grilled-meet-steak-recipe-3.jpeg'},
+
+      // sandwiches (سندوتشات)
+      {id:101,cat:'sandwiches',name_ar:'شاورما دجاج عربي',name_en:'Arabic Chicken Shawarma',desc_ar:'شاورما دجاج متبلة، بطاطس، طحينة، مخلل.',desc_en:'Marinated chicken shawarma with fries, tahini & pickles.',price:48,img:'https://modo3.com/thumbs/fit630x300/46635/1596965187/%D8%B7%D8%B1%D9%82_%D8%B9%D9%85%D9%84_%D8%A7%D9%84%D8%AF%D8%AC%D8%A7%D8%AC_%D8%A8%D8%A3%D9%86%D9%88%D8%A7%D8%B9%D9%87.jpg'},
+      {id:102,cat:'sandwiches',name_ar:'شاورما لحم',name_en:'Beef Shawarma',desc_ar:'شاورما لحم طازج، صوص مخصوص، خس وطماطم.',desc_en:'Fresh beef shawarma with special sauce, lettuce & tomato.',price:52,img:'https://pbs.twimg.com/media/FFhLCrqXsAUZ4nA.jpg'},
+      {id:103,cat:'sandwiches',name_ar:'سندوتش كبدة اسكندراني',name_en:'Alexandrian Liver Sandwich',desc_ar:'كبدة متبلة ومقلية تقدم في خبز طازج.',desc_en:'Spiced fried liver served in fresh bread.',price:45,img:'https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/20ae9fb1-72f5-4762-be4b-196dab140713.jpg'},
+      {id:104,cat:'sandwiches',name_ar:'فلافل مصرية',name_en:'Egyptian Falafel',desc_ar:'فلافل مقلية ومقرمشة تقدم مع سلطة طحينة.',desc_en:'Crispy falafel served with tahini salad.',price:28,img:'https://shata-limon.com/wp-content/uploads/2024/11/%D8%B7%D8%B9%D9%85%D9%8A%D8%A9-%D9%85%D8%B4%D9%83%D9%84.png'},
+      {id:105,cat:'sandwiches',name_ar:'سندوتش حمص باللحمة',name_en:'Hummus with Meat Sandwich',desc_ar:'حمص مع طبقة لحم مبهرة ومخللات.',desc_en:'Hummus topped with spiced minced meat and pickles.',price:60,img:'https://i0.wp.com/mrfelafel.com/wp-content/uploads/2022/02/falafel-cyprus-min.jpeg'},
+      {id:106,cat:'sandwiches',name_ar:'برجر فينو سبيشال',name_en:'Fino Special Burger',desc_ar:'برجر مدخن مع صوص الشيف وخس طازج.',desc_en:'Smoky burger with chef sauce and fresh lettuce.',price:72,img:'https://www.eatthis.com/wp-content/uploads/sites/4/2022/12/burger-king-italian-chicken-sandwiches.jpg'},
+      {id:107,cat:'sandwiches',name_ar:'سجق بلدي',name_en:'Local Sausage Sandwich',desc_ar:'سجق بلدي مطبوخ مع صلصة طماطم حارة.',desc_en:'Local sausage cooked in spicy tomato sauce.',price:55,img:'https://bmzag.com/cdn/shop/files/maxresdefault_787e699e-0bc6-488b-b203-4d96d81b00e4.jpg'},
+      {id:108,cat:'sandwiches',name_ar:'فاهيتا دجاج رول',name_en:'Chicken Fajita Roll',desc_ar:'فاهيتا دجاج متبلة مع خضار مشوية وصلصة حارة.',desc_en:'Spiced chicken fajita with grilled veggies and hot sauce.',price:68,img:'https://kitchen.sayidaty.net/uploads/small/3e/3ef89ad236d90af00c96f8e0216bff49_w360_h360.jpg'},
+
+      // salads (سلطات)
+      {id:201,cat:'salads',name_ar:'فتوش شامي',name_en:'Shami Fattoush',desc_ar:'خضار طازجة وقطع خبز مقلي مع صوص دبس الرمان.',desc_en:'Fresh vegetables with toasted bread and pomegranate molasses dressing.',price:40,img:'https://m.gomhuriaonline.com/Upload/News/9-10-2023_13_28_42_GomhuriaOnline_1696847322.jpg'},
+      {id:202,cat:'salads',name_ar:'تبولة بالبرغل',name_en:'Tabbouleh with Bulgur',desc_ar:'تبولة بالبرغل والبقدونس الطازج.',desc_en:'Bulgur and parsley tabbouleh salad.',price:45,img:'https://mariesaba.com/wp-content/uploads/2021/12/Tabbouleh-0341-716x1024.jpg'},
+      {id:203,cat:'salads',name_ar:'حمص بالطحينة',name_en:'Hummus with Tahini',desc_ar:'حمص ناعم مع طحينة وزيت زيتون وقليل من البابريكا.',desc_en:'Creamy hummus with tahini and olive oil.',price:35,img:'https://modo3.com/thumbs/fit630x300/47795/1434462292/%D8%B7%D8%B1%D9%8A%D9%82%D8%A9_%D8%B9%D9%85%D9%84_%D8%B7%D8%AD%D9%8A%D9%86%D8%A9_%D8%A7%D9%84%D8%AD%D9%85%D8%B5.jpg'},
+      {id:204,cat:'salads',name_ar:'سلطة بلدية',name_en:'Baladi Salad',desc_ar:'خضروات مشكلة مع توابل محلية وزيت زيتون.',desc_en:'Mixed local salad with olive oil and spices.',price:30,img:'https://kitchen.sayidaty.net/uploads/small/27/27f0754e6ea5c1ec9153f6eb03c10346_w750_h750.jpg'},
+      {id:205,cat:'salads',name_ar:'سلطة فتة',name_en:'Fatteh Salad',desc_ar:'فتة مصرية مع خبز مقلي ولبنة وصلصة.',desc_en:'Egyptian fatteh with fried bread, labneh and sauce.',price:55,img:'https://thetablediaries.com/wp-content/uploads/2021/03/fatta-salad-copy-4-1200x1196.jpg'},
+      {id:206,cat:'salads',name_ar:'سلطة جرجير',name_en:'Arugula Salad',desc_ar:'جرجير طازج مع جبنة فيتا ورشة ليمون.',desc_en:'Fresh arugula with feta and lemon.',price:48,img:'https://kitchen.sayidaty.net/uploads/node/rocca_saad_and_corn.jpg'},
+      {id:207,cat:'salads',name_ar:'متبل باذنجان',name_en:'Moutabal (Eggplant Dip)',desc_ar:'باذنجان مشوي مهروس مع طحينة وليمون.',desc_en:'Smoky eggplant mashed with tahini and lemon.',price:38,img:'https://i.ytimg.com/vi/A80VySxJaTE/maxresdefault.jpg'},
+      {id:208,cat:'salads',name_ar:'كول سلو',name_en:'Coleslaw',desc_ar:'كول سلو كريمي مع لمسة عسل وخردل.',desc_en:'Creamy coleslaw with a hint of honey & mustard.',price:32,img:'https://media.elbalad.news/2024/10/large/695/6/230.jpg'},
+
+      // drinks (مشروبات)
+      {id:301,cat:'drinks',name_ar:'ليمون بالنعناع',name_en:'Lemon Mint',desc_ar:'ليمون طازج مع أوراق نعناع ومكعبات ثلج.',desc_en:'Fresh lemon juice with mint and ice.',price:25,img:'https://storage.de.cloud.ovh.net/v1/AUTH_822fb2b5f08942e5991f0bbd03a121b7/minidine-prod/zaytoun-sweets/items/thumbnail/8371690175083_lg.png'},
+      {id:302,cat:'drinks',name_ar:'تمر هندي مثلج',name_en:'Iced Tamarind',desc_ar:'تمر هندي بارداً ومنعش.',desc_en:'Chilled tamarind drink, sweet and tangy.',price:20,img:'https://cdn.al-ain.com/images/2020/4/30/61-103731-benefits-tamarind-drink-health-ramadan_700x400.jpg'},
+      {id:303,cat:'drinks',name_ar:'مانجو فريش',name_en:'Fresh Mango Juice',desc_ar:'عصير مانجو طبيعي طازج.',desc_en:'Natural fresh mango juice.',price:30,img:'https://www.dietcafe.com.qa/wp-content/uploads/2021/08/Fresh-mango-juice.jpg'},
+      {id:304,cat:'drinks',name_ar:'شاي مغربي',name_en:'Moroccan Mint Tea',desc_ar:'شاي أخضر مع نعناع وسكر حسب الرغبة.',desc_en:'Green tea with mint and sugar to taste.',price:18,img:'https://kitchen.sayidaty.net/uploads/small/d3/d353a7a8d27e089eea07cf5d9b798b26_w750_h500.jpg'},
+      {id:305,cat:'drinks',name_ar:'كانز',name_en:'Kanz',desc_ar:'مشروب غازي منعش بنكهة الفواكه.',desc_en:'Refreshing fruit-flavored soft drink.',price:22,img:'https://i.pinimg.com/564x/7b/55/df/7b55dfbc3c207b3275f3753918f09462.jpg'},
+      {id:306,cat:'drinks',name_ar:'قهوة عربية',name_en:'Arabic Coffee',desc_ar:'قهوة عربية تقليدية مُعطرة بالهيل.',desc_en:'Traditional Arabic coffee flavored with cardamom.',price:15,img:'https://al-hamawi.com/wp-content/uploads/2021/10/%D9%82%D9%87%D9%88%D8%A9-600x900.jpeg'},
+      {id:307,cat:'drinks',name_ar:'عصير برتقال طازج',name_en:'Fresh Orange Juice',desc_ar:'برتقال معصور طازجاً.',desc_en:'Freshly squeezed orange juice.',price:28,img:'https://cdn.salla.sa/yAmra/6lhzzeA55277IbjGtzFpuNKBJSizvlYRzThjAR1e.jpg'},
+      {id:308,cat:'drinks',name_ar:'مياه معدنية',name_en:'Mineral Water',desc_ar:'زجاجة مياه صغيرة.',desc_en:'Small bottle of mineral water.',price:10,img:'https://cdn.mafrservices.com/sys-master-root/h01/hd5/16973505789982/18377_main.jpg'}
+    ];
+
+    /* ---------- translations ---------- */
+    const translations = {
+      ar: {
+        menuTitle:'مطعم شامي',
+        heroTitle:'أهلاً بك في مطعم شامي',
+        heroText:'أطعمة سريعة وشامية بطعم أصيل — اطلب بسهولة عبر السلة',
+        tabs:{meals:'🍛 وجبات',sandwiches:'🥪 سندوتشات',salads:'🥗 سلاطات',drinks:'🥤 مشروبات'},
+        add:'🛒 أضف للسلة',
+        itemsText:'عناصر في السلة',
+        totalText:'الإجمالي:',
+        checkout:'تأكيد الطلب',
+        cartEmpty:'السلة فارغة',
+        waTitle:'📝 طلب جديد من منيو مطعم شامي:',
+        waFooter:'\n------------------------\nالإجمالي الكلي: ',
+        waThanks:'\n\nأرجو تأكيد الطلب ورسوم التوصيل. شكراً!'
+      },
+      en: {
+        menuTitle:'Shamy Restaurant',
+        heroTitle:'Welcome to Shamy Restaurant',
+        heroText:'Delicious eastern dishes — order easily via the cart',
+        tabs:{meals:'🍛 Meals',sandwiches:'🥪 Sandwiches',salads:'🥗 Salads',drinks:'🥤 Drinks'},
+        add:'🛒 Add to Cart',
+        itemsText:'items in cart',
+        totalText:'Total:',
+        checkout:'Confirm Order',
+        cartEmpty:'Cart is empty',
+        waTitle:'📝 New Order from Shamy Menu:',
+        waFooter:'\n------------------------\nGrand Total: ',
+        waThanks:'\n\nPlease confirm the order and delivery fees. Thank you!'
+      }
+    };
+
+    /* ---------- state ---------- */
+    let cart = JSON.parse(localStorage.getItem('shamy_cart') || '[]');
+
+    /* ---------- DOM refs ---------- */
+    const tabsContainer = document.getElementById('tabsContainer');
+    const menuEl = document.getElementById('menu');
+    const cartbar = document.getElementById('cartbar');
+    const cartCount = document.getElementById('cartCount');
+    const cartTotal = document.getElementById('cartTotal');
+    const cartPopup = document.getElementById('cartPopup');
+    const cartList = document.getElementById('cartList');
+    const cartFooter = document.getElementById('cartFooter');
+    const langToggleBtn = document.getElementById('langToggle');
+    const menuTitleEl = document.getElementById('menuTitle');
+    const heroTitleEl = document.getElementById('heroTitle');
+    const heroTextEl = document.getElementById('heroText');
+    const cartPopupTitle = document.getElementById('cartPopupTitle');
+
+    /* ---------- helpers ---------- */
+    function formatPrice(n){ return n.toLocaleString(lang==='ar'?'ar-EG':'en-US') + (lang==='ar'?' ج.م':' EGP'); }
+    function saveCart(){ localStorage.setItem('shamy_cart', JSON.stringify(cart)); }
+
+    /* ---------- render tabs ---------- */
+    function renderTabs(){
+      tabsContainer.innerHTML = '';
+      const t = translations[lang].tabs;
+      categories.slice().reverse().forEach(cat => {
+        const btn = document.createElement('button');
+        btn.className = 'tab';
+        btn.textContent = t[cat];
+        btn.dataset.cat = cat;
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+          btn.classList.add('active');
+          renderMenu(cat);
+        });
+        tabsContainer.appendChild(btn);
+      });
+      const first = tabsContainer.querySelector('.tab');
+      if(first){ first.classList.add('active'); renderMenu(first.dataset.cat); }
+    }
+
+    /* ---------- render menu ---------- */
+    function renderMenu(category){
+      menuEl.innerHTML = '';
+      const t = translations[lang];
+      const items = menuData.filter(i=>i.cat===category);
+      items.forEach(it=>{
+        const name = lang==='ar'?it.name_ar:it.name_en;
+        const desc = lang==='ar'?it.desc_ar:it.desc_en;
+        const price = formatPrice(it.price);
+        const card = document.createElement('article');
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="imgwrap"><img src="${it.img}" alt="${name}" loading="lazy" onerror="this.onerror=null;this.src='https://via.placeholder.com/800x600.png?text=Shamy+Food'"></div>
+          <div class="body">
+            <div>
+              <h3>${name}</h3>
+              <p class="desc">${desc}</p>
+              <div class="price">${price}</div>
+            </div>
+            <div><button class="add" onclick="addToCart(${it.id})">${t.add}</button></div>
+          </div>
+        `;
+        menuEl.appendChild(card);
+      });
+    }
+
+    /* ---------- cart logic ---------- */
+    function addToCart(id){
+      const item = menuData.find(x=>x.id===id);
+      if(!item) return;
+      const found = cart.find(c=>c.id===id);
+      if(found) found.qty++;
+      else cart.push({id:item.id,name_ar:item.name_ar,name_en:item.name_en,price:item.price,qty:1});
+      saveCart();
+      updateCartUI();
+      showCartbar();
+    }
+
+    function updateCartUI(){
+      const count = cart.reduce((s,i)=>s+i.qty,0);
+      const total = cart.reduce((s,i)=>s+i.price*i.qty,0);
+      cartCount.textContent = count;
+      cartTotal.textContent = formatPrice(total);
+      if(count>0) showCartbar(); else hideCartbar();
+    }
+
+    function showCartbar(){ cartbar.classList.add('show'); cartbar.setAttribute('aria-hidden','false'); }
+    function hideCartbar(){ cartbar.classList.remove('show'); cartbar.setAttribute('aria-hidden','true'); }
+    function toggleCartPopup(show){
+      if(show){
+        if(cart.length===0) return;
+        renderCartPopup();
+        cartPopup.classList.add('show');
+      } else cartPopup.classList.remove('show');
+    }
+
+    function renderCartPopup(){
+      const t = translations[lang];
+      cartList.innerHTML = '';
+      if(cart.length===0){
+        cartList.innerHTML = `<li style="text-align:center;color:#777;padding:16px">${t.cartEmpty}</li>`;
+        cartFooter.innerHTML = `${t.totalText} <strong>${formatPrice(0)}</strong>`;
+        return;
+      }
+      let total=0;
+      cart.forEach(ci=>{
+        const name = lang==='ar'?ci.name_ar:ci.name_en;
+        const itemTotal = ci.price * ci.qty;
+        total += itemTotal;
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <div style="flex:1;font-weight:800">${name}</div>
+          <div class="qty">
+            <button onclick="changeQty(${ci.id},-1)">-</button>
+            <div style="min-width:24px;text-align:center">${ci.qty}</div>
+            <button onclick="changeQty(${ci.id},1)">+</button>
+          </div>
+          <div style="font-weight:900;color:var(--wa-green);margin-left:8px">${(ci.price*ci.qty).toLocaleString(lang==='ar'?'ar-EG':'en-US')}${lang==='ar'?' ج.م':' EGP'}</div>
+          <div style="margin-left:8px;cursor:pointer;color:var(--danger)" onclick="removeItem(${ci.id})">🗑</div>
+        `;
+        cartList.appendChild(li);
+      });
+      cartFooter.innerHTML = `${translations[lang].totalText} <strong>${(total).toLocaleString(lang==='ar'?'ar-EG':'en-US')}${lang==='ar'?' ج.م':' EGP'}</strong>`;
+    }
+
+    function changeQty(id,delta){
+      const idx = cart.findIndex(c=>c.id===id);
+      if(idx===-1) return;
+      cart[idx].qty += delta;
+      if(cart[idx].qty<=0) cart.splice(idx,1);
+      saveCart(); updateCartUI(); renderCartPopup();
+    }
+
+    function removeItem(id){
+      cart = cart.filter(c=>c.id!==id);
+      saveCart(); updateCartUI(); renderCartPopup();
+    }
+
+    function checkout(){
+      if(cart.length===0){ alert(lang==='ar'?'السلة فارغة!':'Cart is empty!'); return; }
+      const t = translations[lang];
+      let lines = [t.waTitle];
+      let total=0;
+      cart.forEach((c,i)=>{
+        const name = lang==='ar'?c.name_ar:c.name_en;
+        lines.push(`${i+1}. ${name} (x${c.qty}) - ${ (c.price*c.qty).toLocaleString(lang==='ar'?'ar-EG':'en-US')}${lang==='ar'?' ج.م':' EGP' }`);
+        total += c.price*c.qty;
+      });
+      lines.push(t.waFooter + total.toLocaleString(lang==='ar'?'ar-EG':'en-US') + (lang==='ar'?' ج.م':' EGP'));
+      lines.push(t.waThanks);
+      const msg = encodeURIComponent(lines.join('\n'));
+      const url = `https://wa.me/${WA_NUMBER}?text=${msg}`;
+      window.open(url,'_blank');
+      cart = []; saveCart(); updateCartUI(); toggleCartPopup(false);
+    }
+
+    /* ---------- language & UI ---------- */
+    function applyLang(){
+      const t = translations[lang];
+      menuTitleEl.textContent = t.menuTitle;
+      heroTitleEl.textContent = t.heroTitle;
+      heroTextEl.textContent = t.heroText;
+      langToggleBtn.textContent = lang==='ar'?'English':'عربي';
+      document.documentElement.lang = lang;
+      document.documentElement.dir = (lang==='ar'?'rtl':'ltr');
+      renderTabs();
+      updateCartUI();
+    }
+
+    function toggleLang(){
+      lang = (lang==='ar'?'en':'ar');
+      localStorage.setItem('shamy_lang',lang);
+      applyLang();
+    }
+
+    function scrollToMenu(){ document.getElementById('menu').scrollIntoView({behavior:'smooth'}); }
+
+    /* ---------- init ---------- */
+    applyLang();
+    updateCartUI();
+    cartbar.addEventListener('click', (e)=>{
+      if(e.target.closest('.checkout')) return;
+      toggleCartPopup(!cartPopup.classList.contains('show'));
+    });
+    if(cart.length===0) cartPopup.classList.remove('show');
+
+    /* ---------- expose funcs for inline handlers ---------- */
+    window.addToCart = addToCart;
+    window.toggleCartPopup = toggleCartPopup;
+    window.changeQty = changeQty;
+    window.removeItem = removeItem;
+    window.checkout = checkout;
+    window.toggleLang = toggleLang;
+    window.scrollToMenu = scrollToMenu;
+  </script>
+</body>
+</html>
