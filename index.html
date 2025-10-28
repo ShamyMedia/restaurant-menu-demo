@@ -24,7 +24,7 @@
     header h1{margin:0;font-size:1.2rem;font-weight:900}
     .lang-toggle{background:var(--primary);border:none;color:#fff;padding:8px 12px;border-radius:14px;font-weight:700;cursor:pointer}
 
-    .hero{padding:36px 18px;text-align:center;background-image:url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1400&q=80');background-size:cover;background-position:center;color:#fff;position:relative}
+    .hero{padding:36px 18px;text-align:center;background-image:url('  https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1400&q=80');background-size:cover;background-position:center;color:#fff;position:relative}
     .hero::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,0.35)}
     .hero *{position:relative;z-index:1}
     .hero h2{margin:0;font-size:2rem;font-weight:900;text-shadow:1px 1px 6px rgba(0,0,0,0.4)}
@@ -94,16 +94,16 @@
 
   <header>
     <div class="logo">
-      <img src="https://raw.githubusercontent.com/ShamyMedia/Shamy-Menu/main/images/logo.png?raw=true" alt="Shamy Logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/120x60.png?text=Shamy'">
+      <img src="  https://raw.githubusercontent.com/ShamyMedia/Shamy-Menu/main/images/logo.png?raw=true" alt="Shamy Logo" onerror="this.onerror=null; this.src='  https://via.placeholder.com/120x60.png?text=Shamy'">
       <h1 id="menuTitle">مطعم شامي</h1>
     </div>
-    <button class="lang-toggle" id="langToggle" onclick="toggleLang()">English</button>
+    <button class="lang-toggle" id="langToggle">English</button>
   </header>
 
   <section class="hero" aria-hidden="false">
     <h2 id="heroTitle">أهلاً بك في مطعم شامي</h2>
     <p id="heroText">أطعمة سريعة وشامية بطعم أصيل — اطلب بسهولة عبر السلة</p>
-    <div style="margin-top:14px"><button class="cta" onclick="scrollToMenu()">ابدأ الطلب</button></div>
+    <div style="margin-top:14px"><button class="cta" id="scrollToMenuBtn">ابدأ الطلب</button></div>
   </section>
 
   <div class="tabs" id="tabsContainer" role="tablist" aria-label="أقسام المنيو"></div>
@@ -119,23 +119,23 @@
       <span id="cartTotal" class="cart-total">0 ج.م</span>
     </div>
     <div class="cart-actions">
-      <button class="clear-cart" id="clearCartBtn" onclick="clearCart()">مسح السلة</button>
-      <button class="checkout" id="checkoutBtn" onclick="checkout()">تأكيد الطلب</button>
+      <button class="clear-cart" id="clearCartBtn">مسح السلة</button>
+      <button class="checkout" id="checkoutBtn">تأكيد الطلب</button>
     </div>
   </div>
 
   <!-- cart popup -->
   <div class="cart-popup" id="cartPopup" aria-hidden="true">
-    <h4 id="cartPopupTitle">سلة الطلبات <span style="float:left;cursor:pointer" onclick="toggleCartPopup(false)">❌</span></h4>
+    <h4 id="cartPopupTitle">سلة الطلبات <span style="float:left;cursor:pointer" id="closeCartPopupBtn">❌</span></h4>
     <ul id="cartList"></ul>
     <div style="padding:12px;display:flex;justify-content:space-between;font-weight:900;color:var(--danger)" id="cartFooter"></div>
-    <div style="padding:12px"><button class="checkout" style="width:100%" onclick="checkout()">تأكيد الطلب عبر واتساب</button></div>
+    <div style="padding:12px"><button class="checkout" style="width:100%" id="checkoutBtnPopup">تأكيد الطلب عبر واتساب</button></div>
   </div>
 
   <!-- Footer with Shamy Media credit -->
   <footer>
-    <img src="https://raw.githubusercontent.com/ShamyMedia/Shamy-Menu/main/images/logo.png?raw=true" alt="Shamy Media Logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/24x24.png?text=SM'">
-    تصميم برمجة شامي ميديا
+    <img src="  https://raw.githubusercontent.com/ShamyMedia/Shamy-Menu/main/images/logo.png?raw=true" alt="Shamy Media Logo" onerror="this.onerror=null; this.src='  https://via.placeholder.com/24x24.png?text=SM'">
+    تصميم و برمجة شامي ميديا 2025
   </footer>
 
   <script>
@@ -147,44 +147,44 @@
     /* ---------- بيانات المنيو مع الصور المعدّلة ---------- */
     const menuData = [
       // meals (وجبات)
-      {id:1,cat:'meals',name_ar:'سوبر تشيكن فيليه',name_en:'Super Chicken Fillet',desc_ar:'برجر فيليه دجاج مشوي، جبنة شيدر، خس، طماطم، صوص شامي خاص.',desc_en:'Grilled chicken fillet burger with cheddar, lettuce, tomato & special sauce.',price:78,img:'https://images.deliveryhero.io/image/menu-import-gateway-prd/regions/ME/chains/HS-BK/4bd63b510f490d70cbcb53cf2771a9ab.png'},
+      {id:1,cat:'meals',name_ar:'سوبر تشيكن فيليه',name_en:'Super Chicken Fillet',desc_ar:'برجر فيليه دجاج مشوي، جبنة شيدر، خس، طماطم، صوص شامي خاص.',desc_en:'Grilled chicken fillet burger with cheddar, lettuce, tomato & special sauce.',price:78,img:'  https://images.deliveryhero.io/image/menu-import-gateway-prd/regions/ME/chains/HS-BK/4bd63b510f490d70cbcb53cf2771a9ab.png  '},
       {id:2,cat:'meals',name_ar:'كلاسيك برجر لحم',name_en:'Classic Beef Burger',desc_ar:'برجر لحم بقري طازج، جبنة شيدر، بصل مكرمل، خس.',desc_en:'Fresh beef patty, cheddar, caramelized onion, lettuce.',price:85,img:'https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=80'},
-      {id:3,cat:'meals',name_ar:'تشيكن ستربس كومبو',name_en:'Chicken Strips Combo',desc_ar:'شرائح دجاج مقرمشة مع بطاطس وسلطة جانبية.',desc_en:'Crispy chicken strips with fries and side salad.',price:92,img:'https://img.ananinja.com/media/ninja-catalog-42/restaurants/jijzagxingv2kyth7g1d4ldta9zn/20002.jpg'},
-      {id:4,cat:'meals',name_ar:'كومبو ريزو وقطع دجاج',name_en:'Rice & Chicken Combo',desc_ar:'أرز متبل مع قطع دجاج متبلة وصوص لذيذ.',desc_en:'Seasoned rice with marinated chicken pieces.',price:115,img:'https://images.deliveryhero.io/image/talabat/MenuItems/talabat_photos_%D8%AF%D9%8A%D9%86%D8%B1_%D8%A8%D9%88%D9%83%D8%B3638915744621195867.jpg'},
-      {id:5,cat:'meals',name_ar:'وجبة فيليه حار',name_en:'Spicy Fillet Meal',desc_ar:'فيليه دجاج حار، صوص خاص، بطاطس مقرمشة.',desc_en:'Spicy chicken fillet, special sauce, crispy fries.',price:82,img:'https://images.deliveryhero.io/image/menu-import-gateway-prd/regions/ME/chains/HS-CCHN/68b76f8927b45a2f08504e0b059c8fef.jpg'},
-      {id:6,cat:'meals',name_ar:'كومبو عائلي مشكل',name_en:'Family Mixed Combo',desc_ar:'تشكيلة عائلية من الأصناف مع بطاطس وسلطات.',desc_en:'Family mix combo with fries and salads.',price:320,img:'https://chickenkingorder.com/uploads//175988586756241666034286714890.png'},
-      {id:7,cat:'meals',name_ar:'برجر دبل تشيز',name_en:'Double Cheese Burger',desc_ar:'قطعتين لحم مع طبقتين جبنة شيدر، صوص خاص.',desc_en:'Two beef patties with double cheddar and special sauce.',price:120,img:'https://img-global.cpcdn.com/recipes/9263d78abd97cae7/1200x630cq80/photo.jpg'},
-      {id:8,cat:'meals',name_ar:'ستيك لحم مشوي',name_en:'Grilled Beef Steak',desc_ar:'شريحة لحم متبلة مشوية تقدم مع خضار مشوية.',desc_en:'Seasoned grilled steak served with roasted vegetables.',price:260,img:'https://cdn.al-ain.com/lg/images/2019/12/08/47-120948-grilled-meet-steak-recipe-3.jpeg'},
+      {id:3,cat:'meals',name_ar:'تشيكن ستربس كومبو',name_en:'Chicken Strips Combo',desc_ar:'شرائح دجاج مقرمشة مع بطاطس وسلطة جانبية.',desc_en:'Crispy chicken strips with fries and side salad.',price:92,img:'  https://img.ananinja.com/media/ninja-catalog-42/restaurants/jijzagxingv2kyth7g1d4ldta9zn/20002.jpg  '},
+      {id:4,cat:'meals',name_ar:'كومبو ريزو وقطع دجاج',name_en:'Rice & Chicken Combo',desc_ar:'أرز متبل مع قطع دجاج متبلة وصوص لذيذ.',desc_en:'Seasoned rice with marinated chicken pieces.',price:115,img:'https://images.deliveryhero.io/image/talabat/MenuItems/talabat_photos_%D8%AF%D9%8A%D9%86%D8%B1_%D8%A8%D9%88%D9%83%D8%B3638915744621195867.jpg  '},
+      {id:5,cat:'meals',name_ar:'وجبة فيليه حار',name_en:'Spicy Fillet Meal',desc_ar:'فيليه دجاج حار، صوص خاص، بطاطس مقرمشة.',desc_en:'Spicy chicken fillet, special sauce, crispy fries.',price:82,img:'https://images.deliveryhero.io/image/menu-import-gateway-prd/regions/ME/chains/HS-CCHN/68b76f8927b45a2f08504e0b059c8fef.jpg  '},
+      {id:6,cat:'meals',name_ar:'كومبو عائلي مشكل',name_en:'Family Mixed Combo',desc_ar:'تشكيلة عائلية من الأصناف مع بطاطس وسلطات.',desc_en:'Family mix combo with fries and salads.',price:320,img:'https://chickenkingorder.com/uploads//175988586756241666034286714890.png  '},
+      {id:7,cat:'meals',name_ar:'برجر دبل تشيز',name_en:'Double Cheese Burger',desc_ar:'قطعتين لحم مع طبقتين جبنة شيدر، صوص خاص.',desc_en:'Two beef patties with double cheddar and special sauce.',price:120,img:'https://img-global.cpcdn.com/recipes/9263d78abd97cae7/1200x630cq80/photo.jpg  '},
+      {id:8,cat:'meals',name_ar:'ستيك لحم مشوي',name_en:'Grilled Beef Steak',desc_ar:'شريحة لحم متبلة مشوية تقدم مع خضار مشوية.',desc_en:'Seasoned grilled steak served with roasted vegetables.',price:260,img:'https://cdn.al-ain.com/lg/images/2019/12/08/47-120948-grilled-meet-steak-recipe-3.jpeg  '},
 
       // sandwiches (سندوتشات)
-      {id:101,cat:'sandwiches',name_ar:'شاورما دجاج عربي',name_en:'Arabic Chicken Shawarma',desc_ar:'شاورما دجاج متبلة، بطاطس، طحينة، مخلل.',desc_en:'Marinated chicken shawarma with fries, tahini & pickles.',price:48,img:'https://modo3.com/thumbs/fit630x300/46635/1596965187/%D8%B7%D8%B1%D9%82_%D8%B9%D9%85%D9%84_%D8%A7%D9%84%D8%AF%D8%AC%D8%A7%D8%AC_%D8%A8%D8%A3%D9%86%D9%88%D8%A7%D8%B9%D9%87.jpg'},
-      {id:102,cat:'sandwiches',name_ar:'شاورما لحم',name_en:'Beef Shawarma',desc_ar:'شاورما لحم طازج، صوص مخصوص، خس وطماطم.',desc_en:'Fresh beef shawarma with special sauce, lettuce & tomato.',price:52,img:'https://pbs.twimg.com/media/FFhLCrqXsAUZ4nA.jpg'},
-      {id:103,cat:'sandwiches',name_ar:'سندوتش كبدة اسكندراني',name_en:'Alexandrian Liver Sandwich',desc_ar:'كبدة متبلة ومقلية تقدم في خبز طازج.',desc_en:'Spiced fried liver served in fresh bread.',price:45,img:'https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/20ae9fb1-72f5-4762-be4b-196dab140713.jpg'},
-      {id:104,cat:'sandwiches',name_ar:'فلافل مصرية',name_en:'Egyptian Falafel',desc_ar:'فلافل مقلية ومقرمشة تقدم مع سلطة طحينة.',desc_en:'Crispy falafel served with tahini salad.',price:28,img:'https://shata-limon.com/wp-content/uploads/2024/11/%D8%B7%D8%B9%D9%85%D9%8A%D8%A9-%D9%85%D8%B4%D9%83%D9%84.png'},
-      {id:105,cat:'sandwiches',name_ar:'سندوتش حمص باللحمة',name_en:'Hummus with Meat Sandwich',desc_ar:'حمص مع طبقة لحم مبهرة ومخللات.',desc_en:'Hummus topped with spiced minced meat and pickles.',price:60,img:'https://i0.wp.com/mrfelafel.com/wp-content/uploads/2022/02/falafel-cyprus-min.jpeg'},
-      {id:106,cat:'sandwiches',name_ar:'برجر فينو سبيشال',name_en:'Fino Special Burger',desc_ar:'برجر مدخن مع صوص الشيف وخس طازج.',desc_en:'Smoky burger with chef sauce and fresh lettuce.',price:72,img:'https://www.eatthis.com/wp-content/uploads/sites/4/2022/12/burger-king-italian-chicken-sandwiches.jpg'},
-      {id:107,cat:'sandwiches',name_ar:'سجق بلدي',name_en:'Local Sausage Sandwich',desc_ar:'سجق بلدي مطبوخ مع صلصة طماطم حارة.',desc_en:'Local sausage cooked in spicy tomato sauce.',price:55,img:'https://bmzag.com/cdn/shop/files/maxresdefault_787e699e-0bc6-488b-b203-4d96d81b00e4.jpg'},
-      {id:108,cat:'sandwiches',name_ar:'فاهيتا دجاج رول',name_en:'Chicken Fajita Roll',desc_ar:'فاهيتا دجاج متبلة مع خضار مشوية وصلصة حارة.',desc_en:'Spiced chicken fajita with grilled veggies and hot sauce.',price:68,img:'https://kitchen.sayidaty.net/uploads/small/3e/3ef89ad236d90af00c96f8e0216bff49_w360_h360.jpg'},
+      {id:101,cat:'sandwiches',name_ar:'شاورما دجاج عربي',name_en:'Arabic Chicken Shawarma',desc_ar:'شاورما دجاج متبلة، بطاطس، طحينة، مخلل.',desc_en:'Marinated chicken shawarma with fries, tahini & pickles.',price:48,img:'https://modo3.com/thumbs/fit630x300/46635/1596965187/%D8%B7%D8%B1%D9%82_%D8%B9%D9%85%D9%84_%D8%A7%D9%84%D8%AF%D8%AC%D8%A7%D8%AC_%D8%A8%D8%A3%D9%86%D9%88%D8%A7%D8%B9%D9%87.jpg  '},
+      {id:102,cat:'sandwiches',name_ar:'شاورما لحم',name_en:'Beef Shawarma',desc_ar:'شاورما لحم طازج، صوص مخصوص، خس وطماطم.',desc_en:'Fresh beef shawarma with special sauce, lettuce & tomato.',price:52,img:'https://pbs.twimg.com/media/FFhLCrqXsAUZ4nA.jpg  '},
+      {id:103,cat:'sandwiches',name_ar:'سندوتش كبدة اسكندراني',name_en:'Alexandrian Liver Sandwich',desc_ar:'كبدة متبلة ومقلية تقدم في خبز طازج.',desc_en:'Spiced fried liver served in fresh bread.',price:45,img:'https://s3-eu-west-1.amazonaws.com/elmenusv5-stg/Normal/20ae9fb1-72f5-4762-be4b-196dab140713.jpg  '},
+      {id:104,cat:'sandwiches',name_ar:'فلافل مصرية',name_en:'Egyptian Falafel',desc_ar:'فلافل مقلية ومقرمشة تقدم مع سلطة طحينة.',desc_en:'Crispy falafel served with tahini salad.',price:28,img:'https://shata-limon.com/wp-content/uploads/2024/11/%D8%B7%D8%B9%D9%85%D9%8A%D8%A9-%D9%85%D8%B4%D9%83%D9%84.png  '},
+      {id:105,cat:'sandwiches',name_ar:'سندوتش حمص باللحمة',name_en:'Hummus with Meat Sandwich',desc_ar:'حمص مع طبقة لحم مبهرة ومخللات.',desc_en:'Hummus topped with spiced minced meat and pickles.',price:60,img:'https://i0.wp.com/mrfelafel.com/wp-content/uploads/2022/02/falafel-cyprus-min.jpeg  '},
+      {id:106,cat:'sandwiches',name_ar:'برجر فينو سبيشال',name_en:'Fino Special Burger',desc_ar:'برجر مدخن مع صوص الشيف وخس طازج.',desc_en:'Smoky burger with chef sauce and fresh lettuce.',price:72,img:'https://www.eatthis.com/wp-content/uploads/sites/4/2022/12/burger-king-italian-chicken-sandwiches.jpg  '},
+      {id:107,cat:'sandwiches',name_ar:'سجق بلدي',name_en:'Local Sausage Sandwich',desc_ar:'سجق بلدي مطبوخ مع صلصة طماطم حارة.',desc_en:'Local sausage cooked in spicy tomato sauce.',price:55,img:'https://bmzag.com/cdn/shop/files/maxresdefault_787e699e-0bc6-488b-b203-4d96d81b00e4.jpg  '},
+      {id:108,cat:'sandwiches',name_ar:'فاهيتا دجاج رول',name_en:'Chicken Fajita Roll',desc_ar:'فاهيتا دجاج متبلة مع خضار مشوية وصلصة حارة.',desc_en:'Spiced chicken fajita with grilled veggies and hot sauce.',price:68,img:'https://kitchen.sayidaty.net/uploads/small/3e/3ef89ad236d90af00c96f8e0216bff49_w360_h360.jpg  '},
 
       // salads (سلطات)
-      {id:201,cat:'salads',name_ar:'فتوش شامي',name_en:'Shami Fattoush',desc_ar:'خضار طازجة وقطع خبز مقلي مع صوص دبس الرمان.',desc_en:'Fresh vegetables with toasted bread and pomegranate molasses dressing.',price:40,img:'https://m.gomhuriaonline.com/Upload/News/9-10-2023_13_28_42_GomhuriaOnline_1696847322.jpg'},
-      {id:202,cat:'salads',name_ar:'تبولة بالبرغل',name_en:'Tabbouleh with Bulgur',desc_ar:'تبولة بالبرغل والبقدونس الطازج.',desc_en:'Bulgur and parsley tabbouleh salad.',price:45,img:'https://mariesaba.com/wp-content/uploads/2021/12/Tabbouleh-0341-716x1024.jpg'},
-      {id:203,cat:'salads',name_ar:'حمص بالطحينة',name_en:'Hummus with Tahini',desc_ar:'حمص ناعم مع طحينة وزيت زيتون وقليل من البابريكا.',desc_en:'Creamy hummus with tahini and olive oil.',price:35,img:'https://modo3.com/thumbs/fit630x300/47795/1434462292/%D8%B7%D8%B1%D9%8A%D9%82%D8%A9_%D8%B9%D9%85%D9%84_%D8%B7%D8%AD%D9%8A%D9%86%D8%A9_%D8%A7%D9%84%D8%AD%D9%85%D8%B5.jpg'},
-      {id:204,cat:'salads',name_ar:'سلطة بلدية',name_en:'Baladi Salad',desc_ar:'خضروات مشكلة مع توابل محلية وزيت زيتون.',desc_en:'Mixed local salad with olive oil and spices.',price:30,img:'https://kitchen.sayidaty.net/uploads/small/27/27f0754e6ea5c1ec9153f6eb03c10346_w750_h750.jpg'},
-      {id:205,cat:'salads',name_ar:'سلطة فتة',name_en:'Fatteh Salad',desc_ar:'فتة مصرية مع خبز مقلي ولبنة وصلصة.',desc_en:'Egyptian fatteh with fried bread, labneh and sauce.',price:55,img:'https://thetablediaries.com/wp-content/uploads/2021/03/fatta-salad-copy-4-1200x1196.jpg'},
-      {id:206,cat:'salads',name_ar:'سلطة جرجير',name_en:'Arugula Salad',desc_ar:'جرجير طازج مع جبنة فيتا ورشة ليمون.',desc_en:'Fresh arugula with feta and lemon.',price:48,img:'https://kitchen.sayidaty.net/uploads/node/rocca_saad_and_corn.jpg'},
-      {id:207,cat:'salads',name_ar:'متبل باذنجان',name_en:'Moutabal (Eggplant Dip)',desc_ar:'باذنجان مشوي مهروس مع طحينة وليمون.',desc_en:'Smoky eggplant mashed with tahini and lemon.',price:38,img:'https://i.ytimg.com/vi/A80VySxJaTE/maxresdefault.jpg'},
-      {id:208,cat:'salads',name_ar:'كول سلو',name_en:'Coleslaw',desc_ar:'كول سلو كريمي مع لمسة عسل وخردل.',desc_en:'Creamy coleslaw with a hint of honey & mustard.',price:32,img:'https://media.elbalad.news/2024/10/large/695/6/230.jpg'},
+      {id:201,cat:'salads',name_ar:'فتوش شامي',name_en:'Shami Fattoush',desc_ar:'خضار طازجة وقطع خبز مقلي مع صوص دبس الرمان.',desc_en:'Fresh vegetables with toasted bread and pomegranate molasses dressing.',price:40,img:'https://m.gomhuriaonline.com/Upload/News/9-10-2023_13_28_42_GomhuriaOnline_1696847322.jpg  '},
+      {id:202,cat:'salads',name_ar:'تبولة بالبرغل',name_en:'Tabbouleh with Bulgur',desc_ar:'تبولة بالبرغل والبقدونس الطازج.',desc_en:'Bulgur and parsley tabbouleh salad.',price:45,img:'https://mariesaba.com/wp-content/uploads/2021/12/Tabbouleh-0341-716x1024.jpg  '},
+      {id:203,cat:'salads',name_ar:'حمص بالطحينة',name_en:'Hummus with Tahini',desc_ar:'حمص ناعم مع طحينة وزيت زيتون وقليل من البابريكا.',desc_en:'Creamy hummus with tahini and olive oil.',price:35,img:'https://modo3.com/thumbs/fit630x300/47795/1434462292/%D8%B7%D8%B1%D9%8A%D9%82%D8%A9_%D8%B9%D9%85%D9%84_%D8%B7%D8%AD%D9%8A%D9%86%D8%A9_%D8%A7%D9%84%D8%AD%D9%85%D8%B5.jpg  '},
+      {id:204,cat:'salads',name_ar:'سلطة بلدية',name_en:'Baladi Salad',desc_ar:'خضروات مشكلة مع توابل محلية وزيت زيتون.',desc_en:'Mixed local salad with olive oil and spices.',price:30,img:'https://kitchen.sayidaty.net/uploads/small/27/27f0754e6ea5c1ec9153f6eb03c10346_w750_h750.jpg  '},
+      {id:205,cat:'salads',name_ar:'سلطة فتة',name_en:'Fatteh Salad',desc_ar:'فتة مصرية مع خبز مقلي ولبنة وصلصة.',desc_en:'Egyptian fatteh with fried bread, labneh and sauce.',price:55,img:'https://thetablediaries.com/wp-content/uploads/2021/03/fatta-salad-copy-4-1200x1196.jpg  '},
+      {id:206,cat:'salads',name_ar:'سلطة جرجير',name_en:'Arugula Salad',desc_ar:'جرجير طازج مع جبنة فيتا ورشة ليمون.',desc_en:'Fresh arugula with feta and lemon.',price:48,img:'https://kitchen.sayidaty.net/uploads/node/rocca_saad_and_corn.jpg  '},
+      {id:207,cat:'salads',name_ar:'متبل باذنجان',name_en:'Moutabal (Eggplant Dip)',desc_ar:'باذنجان مشوي مهروس مع طحينة وليمون.',desc_en:'Smoky eggplant mashed with tahini and lemon.',price:38,img:'https://i.ytimg.com/vi/A80VySxJaTE/maxresdefault.jpg  '},
+      {id:208,cat:'salads',name_ar:'كول سلو',name_en:'Coleslaw',desc_ar:'كول سلو كريمي مع لمسة عسل وخردل.',desc_en:'Creamy coleslaw with a hint of honey & mustard.',price:32,img:'https://media.elbalad.news/2024/10/large/695/6/230.jpg  '},
 
       // drinks (مشروبات)
-      {id:301,cat:'drinks',name_ar:'ليمون بالنعناع',name_en:'Lemon Mint',desc_ar:'ليمون طازج مع أوراق نعناع ومكعبات ثلج.',desc_en:'Fresh lemon juice with mint and ice.',price:25,img:'https://storage.de.cloud.ovh.net/v1/AUTH_822fb2b5f08942e5991f0bbd03a121b7/minidine-prod/zaytoun-sweets/items/thumbnail/8371690175083_lg.png'},
-      {id:302,cat:'drinks',name_ar:'تمر هندي مثلج',name_en:'Iced Tamarind',desc_ar:'تمر هندي بارداً ومنعش.',desc_en:'Chilled tamarind drink, sweet and tangy.',price:20,img:'https://cdn.al-ain.com/images/2020/4/30/61-103731-benefits-tamarind-drink-health-ramadan_700x400.jpg'},
-      {id:303,cat:'drinks',name_ar:'مانجو فريش',name_en:'Fresh Mango Juice',desc_ar:'عصير مانجو طبيعي طازج.',desc_en:'Natural fresh mango juice.',price:30,img:'https://www.dietcafe.com.qa/wp-content/uploads/2021/08/Fresh-mango-juice.jpg'},
-      {id:304,cat:'drinks',name_ar:'شاي مغربي',name_en:'Moroccan Mint Tea',desc_ar:'شاي أخضر مع نعناع وسكر حسب الرغبة.',desc_en:'Green tea with mint and sugar to taste.',price:18,img:'https://kitchen.sayidaty.net/uploads/small/d3/d353a7a8d27e089eea07cf5d9b798b26_w750_h500.jpg'},
-      {id:305,cat:'drinks',name_ar:'كانز',name_en:'Kanz',desc_ar:'مشروب غازي منعش بنكهة الفواكه.',desc_en:'Refreshing fruit-flavored soft drink.',price:22,img:'https://i.pinimg.com/564x/7b/55/df/7b55dfbc3c207b3275f3753918f09462.jpg'},
-      {id:306,cat:'drinks',name_ar:'قهوة عربية',name_en:'Arabic Coffee',desc_ar:'قهوة عربية تقليدية مُعطرة بالهيل.',desc_en:'Traditional Arabic coffee flavored with cardamom.',price:15,img:'https://al-hamawi.com/wp-content/uploads/2021/10/%D9%82%D9%87%D9%88%D8%A9-600x900.jpeg'},
-      {id:307,cat:'drinks',name_ar:'عصير برتقال طازج',name_en:'Fresh Orange Juice',desc_ar:'برتقال معصور طازجاً.',desc_en:'Freshly squeezed orange juice.',price:28,img:'https://cdn.salla.sa/yAmra/6lhzzeA55277IbjGtzFpuNKBJSizvlYRzThjAR1e.jpg'},
-      {id:308,cat:'drinks',name_ar:'مياه معدنية',name_en:'Mineral Water',desc_ar:'زجاجة مياه صغيرة.',desc_en:'Small bottle of mineral water.',price:10,img:'https://cdn.mafrservices.com/sys-master-root/h01/hd5/16973505789982/18377_main.jpg'}
+      {id:301,cat:'drinks',name_ar:'ليمون بالنعناع',name_en:'Lemon Mint',desc_ar:'ليمون طازج مع أوراق نعناع ومكعبات ثلج.',desc_en:'Fresh lemon juice with mint and ice.',price:25,img:'https://storage.de.cloud.ovh.net/v1/AUTH_822fb2b5f08942e5991f0bbd03a121b7/minidine-prod/zaytoun-sweets/items/thumbnail/8371690175083_lg.png  '},
+      {id:302,cat:'drinks',name_ar:'تمر هندي مثلج',name_en:'Iced Tamarind',desc_ar:'تمر هندي بارداً ومنعش.',desc_en:'Chilled tamarind drink, sweet and tangy.',price:20,img:'https://cdn.al-ain.com/images/2020/4/30/61-103731-benefits-tamarind-drink-health-ramadan_700x400.jpg  '},
+      {id:303,cat:'drinks',name_ar:'مانجو فريش',name_en:'Fresh Mango Juice',desc_ar:'عصير مانجو طبيعي طازج.',desc_en:'Natural fresh mango juice.',price:30,img:'https://www.dietcafe.com.qa/wp-content/uploads/2021/08/Fresh-mango-juice.jpg  '},
+      {id:304,cat:'drinks',name_ar:'شاي مغربي',name_en:'Moroccan Mint Tea',desc_ar:'شاي أخضر مع نعناع وسكر حسب الرغبة.',desc_en:'Green tea with mint and sugar to taste.',price:18,img:'https://kitchen.sayidaty.net/uploads/small/d3/d353a7a8d27e089eea07cf5d9b798b26_w750_h500.jpg  '},
+      {id:305,cat:'drinks',name_ar:'كانز',name_en:'Kanz',desc_ar:'مشروب غازي منعش بنكهة الفواكه.',desc_en:'Refreshing fruit-flavored soft drink.',price:22,img:'https://i.pinimg.com/564x/7b/55/df/7b55dfbc3c207b3275f3753918f09462.jpg  '},
+      {id:306,cat:'drinks',name_ar:'قهوة عربية',name_en:'Arabic Coffee',desc_ar:'قهوة عربية تقليدية مُعطرة بالهيل.',desc_en:'Traditional Arabic coffee flavored with cardamom.',price:15,img:'https://al-hamawi.com/wp-content/uploads/2021/10/%D9%82%D9%87%D9%88%D8%A9-600x900.jpeg  '},
+      {id:307,cat:'drinks',name_ar:'عصير برتقال طازج',name_en:'Fresh Orange Juice',desc_ar:'برتقال معصور طازجاً.',desc_en:'Freshly squeezed orange juice.',price:28,img:'https://cdn.salla.sa/yAmra/6lhzzeA55277IbjGtzFpuNKBJSizvlYRzThjAR1e.jpg  '},
+      {id:308,cat:'drinks',name_ar:'مياه معدنية',name_en:'Mineral Water',desc_ar:'زجاجة مياه صغيرة.',desc_en:'Small bottle of mineral water.',price:10,img:'https://cdn.mafrservices.com/sys-master-root/h01/hd5/16973505789982/18377_main.jpg  '}
     ];
 
     /* ---------- translations ---------- */
@@ -200,6 +200,7 @@
         checkout:'تأكيد الطلب',
         clearCart:'مسح السلة',
         cartEmpty:'السلة فارغة',
+        cartPopupTitle: 'سلة الطلبات', // New translation key
         waTitle:'📝 طلب جديد من منيو مطعم شامي:',
         waFooter:'\n------------------------\nالإجمالي الكلي: ',
         waThanks:'\n\nأرجو تأكيد الطلب ورسوم التوصيل. شكراً!'
@@ -215,6 +216,7 @@
         checkout:'Confirm Order',
         clearCart:'Clear Cart',
         cartEmpty:'Cart is empty',
+        cartPopupTitle: 'Order Cart', // New translation key
         waTitle:'📝 New Order from Shamy Menu:',
         waFooter:'\n------------------------\nGrand Total: ',
         waThanks:'\n\nPlease confirm the order and delivery fees. Thank you!'
@@ -242,6 +244,59 @@
     /* ---------- helpers ---------- */
     function formatPrice(n){ return n.toLocaleString(lang==='ar'?'ar-EG':'en-US') + (lang==='ar'?' ج.م':' EGP'); }
     function saveCart(){ localStorage.setItem('shamy_cart', JSON.stringify(cart)); }
+
+    /* ---------- event listeners setup ---------- */
+    function setupEventListeners() {
+        // Header: Language toggle
+        langToggleBtn.addEventListener('click', toggleLang);
+
+        // Hero: Scroll to menu
+        document.getElementById('scrollToMenuBtn').addEventListener('click', scrollToMenu);
+
+        // Cart bar: Toggle popup and clear/checkout
+        cartbar.addEventListener('click', (e) => {
+            if (e.target.closest('.checkout')) {
+                checkout();
+                return;
+            }
+            if (e.target.closest('.clear-cart')) {
+                clearCart();
+                return;
+            }
+            // Toggle popup if clicked on the cart bar itself (not buttons)
+            if (!e.target.closest('.cart-actions')) {
+                toggleCartPopup(!cartPopup.classList.contains('show'));
+            }
+        });
+
+        // Cart Popup: Close button
+        document.getElementById('closeCartPopupBtn').addEventListener('click', () => toggleCartPopup(false));
+
+        // Cart Popup: Checkout button
+        document.getElementById('checkoutBtnPopup').addEventListener('click', checkout);
+
+        // Cart Popup: Dynamically added buttons will use event delegation
+        cartList.addEventListener('click', (e) => {
+            const minusBtn = e.target.closest('.qty-minus');
+            const plusBtn = e.target.closest('.qty-plus');
+            const removeBtn = e.target.closest('.remove-item');
+
+            if (minusBtn) {
+                const id = parseInt(minusBtn.dataset.id);
+                changeQty(id, -1);
+            } else if (plusBtn) {
+                const id = parseInt(plusBtn.dataset.id);
+                changeQty(id, 1);
+            } else if (removeBtn) {
+                const id = parseInt(removeBtn.dataset.id);
+                removeItem(id);
+            }
+        });
+
+        // Main buttons (Checkout & Clear Cart)
+        document.getElementById('checkoutBtn').addEventListener('click', checkout);
+        document.getElementById('clearCartBtn').addEventListener('click', clearCart);
+    }
 
     /* ---------- render tabs ---------- */
     function renderTabs(){
@@ -283,9 +338,14 @@
               <p class="desc">${desc}</p>
               <div class="price">${price}</div>
             </div>
-            <div><button class="add" onclick="addToCart(${it.id})">${t.add}</button></div>
+            <div><button class="add" data-id="${it.id}">${t.add}</button></div>
           </div>
         `;
+        // Add event listener to the new 'add' button
+        card.querySelector('.add').addEventListener('click', (e) => {
+            const id = parseInt(e.target.dataset.id);
+            addToCart(id);
+        });
         menuEl.appendChild(card);
       });
     }
@@ -293,7 +353,11 @@
     /* ---------- cart logic ---------- */
     function addToCart(id){
       const item = menuData.find(x=>x.id===id);
-      if(!item) return;
+      // Improvement: Check if item exists before proceeding
+      if(!item) {
+        console.warn("Item with id " + id + " not found in menuData.");
+        return;
+      }
       const found = cart.find(c=>c.id===id);
       if(found) found.qty++;
       else cart.push({id:item.id,name_ar:item.name_ar,name_en:item.name_en,price:item.price,qty:1});
@@ -322,6 +386,8 @@
 
     function renderCartPopup(){
       const t = translations[lang];
+      // Update popup title based on language
+      cartPopupTitle.innerHTML = `${t.cartPopupTitle} <span style="float:left;cursor:pointer" id="closeCartPopupBtn">❌</span>`; // Re-render close button
       cartList.innerHTML = '';
       if(cart.length===0){
         cartList.innerHTML = `<li style="text-align:center;color:#777;padding:16px">${t.cartEmpty}</li>`;
@@ -337,12 +403,12 @@
         li.innerHTML = `
           <div style="flex:1;font-weight:800">${name}</div>
           <div class="qty">
-            <button onclick="changeQty(${ci.id},-1)">-</button>
+            <button class="qty-minus" data-id="${ci.id}">-</button>
             <div style="min-width:24px;text-align:center">${ci.qty}</div>
-            <button onclick="changeQty(${ci.id},1)">+</button>
+            <button class="qty-plus" data-id="${ci.id}">+</button>
           </div>
           <div style="font-weight:900;color:var(--wa-green);margin-left:8px">${(ci.price*ci.qty).toLocaleString(lang==='ar'?'ar-EG':'en-US')}${lang==='ar'?' ج.م':' EGP'}</div>
-          <div style="margin-left:8px;cursor:pointer;color:var(--danger)" onclick="removeItem(${ci.id})">🗑</div>
+          <div style="margin-left:8px;cursor:pointer;color:var(--danger)" class="remove-item" data-id="${ci.id}">🗑</div>
         `;
         cartList.appendChild(li);
       });
@@ -384,7 +450,7 @@
       lines.push(t.waFooter + total.toLocaleString(lang==='ar'?'ar-EG':'en-US') + (lang==='ar'?' ج.م':' EGP'));
       lines.push(t.waThanks);
       const msg = encodeURIComponent(lines.join('\n'));
-      const url = `https://wa.me/${WA_NUMBER}?text=${msg}`;
+      const url = `  https://wa.me/${WA_NUMBER}?text=${msg}`;
       window.open(url,'_blank');
       cart = []; saveCart(); updateCartUI(); toggleCartPopup(false);
     }
@@ -411,15 +477,15 @@
     function scrollToMenu(){ document.getElementById('menu').scrollIntoView({behavior:'smooth'}); }
 
     /* ---------- init ---------- */
-    applyLang();
-    updateCartUI();
-    cartbar.addEventListener('click', (e)=>{
-      if(e.target.closest('.checkout') || e.target.closest('.clear-cart')) return;
-      toggleCartPopup(!cartPopup.classList.contains('show'));
+    document.addEventListener('DOMContentLoaded', () => {
+        applyLang();
+        updateCartUI();
+        setupEventListeners();
+        // Initialize cart popup visibility
+        if(cart.length===0) cartPopup.classList.remove('show');
     });
-    if(cart.length===0) cartPopup.classList.remove('show');
 
-    /* ---------- expose funcs for inline handlers ---------- */
+    /* ---------- expose funcs for inline handlers (maintained for potential external scripts, though not used in HTML now) ---------- */
     window.addToCart = addToCart;
     window.toggleCartPopup = toggleCartPopup;
     window.changeQty = changeQty;
